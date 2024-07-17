@@ -34,5 +34,6 @@ services:
 
 
     App\Service\MessageGenerator:
+        public: true
         arguments:
             $adminEmail: '%admin_email%'
