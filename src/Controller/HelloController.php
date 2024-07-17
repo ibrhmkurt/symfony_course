@@ -15,7 +15,9 @@ class HelloController extends Controller
      */
     public function hello()
     {
-        $messageGenerator = $this->container->get(MessageGenerator::class);
-        return new Response($messageGenerator->helloMessage());
+        $messageGenerator = $this->container->get('mg');
+        $session = $this->container->get('session');
+
+        return new Response($messageGenerator->helloMessage().'---'.$session->getName());
     }
 }
