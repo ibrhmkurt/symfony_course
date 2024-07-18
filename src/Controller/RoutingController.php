@@ -68,4 +68,29 @@ class RoutingController extends AbstractController
     {
         return new JsonResponse(['message' => $page]);
     }
+
+    /**
+     * @Route("/posts-listing/{page<\d+>?2}")
+     */
+    public function postListing2($page)
+    {
+        return new JsonResponse(['message' => $page]);
+    }
+
+    /**
+     * @Route(
+     *      "/articles/{_locale}/{year}/{slug}.{_format}",
+     *      defaults={"_format": "html"},
+     *      requirements={
+     *          "_locale": "en|tr",
+     *          "_format": "html|json",
+     *          "year": "\d+"
+     * }
+     * )
+     * @return JsonResponse
+     */
+    public function showArticle($_locale, $year, $slug, $_format)
+    {
+        return new JsonResponse(['message' => implode("--",[$_locale, $year, $slug, $_format])]);
+    }
 }
