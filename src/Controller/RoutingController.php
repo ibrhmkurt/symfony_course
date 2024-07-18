@@ -60,4 +60,12 @@ class RoutingController extends AbstractController
     {
         return new JsonResponse(['message' => $id]);
     }
+
+     /**
+     * @Route("/posts/{page}", name="post_listing", requirements={"page"="\d+"})
+     */
+    public function postListing($page = 1)
+    {
+        return new JsonResponse(['message' => $page]);
+    }
 }
