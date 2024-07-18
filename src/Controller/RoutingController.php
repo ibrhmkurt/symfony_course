@@ -21,10 +21,18 @@ class RoutingController extends AbstractController
     }
 
     /**
-     * @Route("/list/{page}", name="blog_list")
+     * @Route("/blog/{page}", name="page_number", requirements={"page"="\d+"})
      */
-    public function post_list($page)
+    public function postList($page)
     {
         return new Response("Page: ".$page);
+    }
+
+    /**
+     * @Route("/blog/{postSlug}", name="post_slug")
+     */
+    public function listWithSlug($postSlug)
+    {
+        return new Response("Page Slug: ".$postSlug);
     }
 }
