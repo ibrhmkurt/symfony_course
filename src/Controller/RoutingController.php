@@ -29,10 +29,35 @@ class RoutingController extends AbstractController
     }
 
     /**
+     * @Route("/blog-list/{page<\d+>}", name="page_number",)
+     */
+    public function blogList($page)
+    {
+        return new Response("Page: ".$page);
+    }
+
+
+    /**
      * @Route("/blog/{postSlug}", name="post_slug")
      */
     public function listWithSlug($postSlug)
     {
         return new Response("Page Slug: ".$postSlug);
+    }
+
+    /**
+     * @Route("/routing/hello/{_locale}", defaults={"_locale"="tr"}, requirements={"_locale"="en|tr"})
+     */
+    public function helloRouting($_locale)
+    {
+        return new Response("Locale is : ".$_locale);
+    }
+
+    /**
+     * @Route("/api/posts/{id}", methods={"GET", "HEAD"})
+     */
+    public function showPost($id)
+    {
+        return new JsonResponse(['message' => $id]);
     }
 }
