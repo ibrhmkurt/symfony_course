@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RoutingController extends AbstractController
 {
@@ -93,4 +94,34 @@ class RoutingController extends AbstractController
     {
         return new JsonResponse(['message' => implode("--",[$_locale, $year, $slug, $_format])]);
     }
+
+
+    /**
+     * @Route("/generate-url")
+     */
+    public function geUrl()
+    {
+        $url = $this->generateUrl('app_routing_geurl', [
+            '_locale' => 'en',
+            '_format' => 'html',
+            'year' => 1994,
+            'slug' => 'kaliteli-hizmet-nasıl-verilir'
+        ]);
+        return new JsonResponse(['url' => $url]);   
+    }   
+
+     /**
+     * @Route("/generate-url-service")
+     */
+    public function geUrl2(UrlGeneratorInterface $router)
+    {
+        $url = $router->generate('app_routing_geurl2', [
+            '_locale' => 'en',
+            '_format' => 'html',
+            'year' => 1994,
+            'slug' => 'kaliteli-hizmet-nasıl-verilir'
+        ]);
+        return new JsonResponse(['url' => $url]);   
+    }
+
 }
