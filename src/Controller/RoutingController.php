@@ -71,7 +71,7 @@ class RoutingController extends AbstractController
     }
 
     /**
-     * @Route("/posts-listing/{page<\d+>?2}")
+     * @Route("/posts-listing/{page<\d+>?2}", name="new-post-list")
      */
     public function postListing2($page)
     {
@@ -119,9 +119,28 @@ class RoutingController extends AbstractController
             '_locale' => 'en',
             '_format' => 'html',
             'year' => 1994,
-            'slug' => 'kaliteli-hizmet-nasıl-verilir'
+            'slug' => 'kaliteli-hizmet-nasıl-verilir-yeni-version'
         ]);
         return new JsonResponse(['url' => $url]);   
     }
 
+      /**
+     * @Route("/generate-url-example")
+     */
+    public function geUrl3()
+    {
+        $url = $this->generateUrl('new-post-list', [
+            'page' => 19,
+            'category' => 'health',
+            'age' => 30
+        ]);
+
+        $fullUrl = $this->generateUrl('new-post-list', [
+            'page' => 19,
+            'category' => 'health',
+            'age' => 30
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        return new JsonResponse(['url' => $url, 'fullUrl' => $fullUrl]);   
+    }
 }
