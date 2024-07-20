@@ -56,6 +56,6 @@ class IndexController extends AbstractController
      */
     public function responseTest(RequestStack $requesStack)
     {
-        return new JsonResponse(["message" => "hello ibrahim"]);
+        return $this->redirectToRoute('request_test');
     }
 }
