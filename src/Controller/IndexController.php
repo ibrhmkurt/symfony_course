@@ -30,7 +30,7 @@ class IndexController extends AbstractController
         $name = $request->request->get('name');
 
         // $_GET
-        $request->query->get('name');
+        $name = $request->query->get('name', 'Ahmet');
 
         // $_COOKİE
         $request->cookies->get('username');
@@ -44,6 +44,18 @@ class IndexController extends AbstractController
         // $_SERVER
         $serverData = $request->server->all();
 
-        var_dump($serverData);exit();
+        $headers = $request->headers->all();
+
+        var_dump($headers);exit();
+    }
+
+    /**
+     * @Route("/response", name="response_test")
+     * @param RequestStack $requestStack
+     * @return Response
+     */
+    public function responseTest(RequestStack $requesStack)
+    {
+        return new JsonResponse(["message" => "hello ibrahim"]);
     }
 }
