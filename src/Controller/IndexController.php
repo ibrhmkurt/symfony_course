@@ -58,4 +58,16 @@ class IndexController extends AbstractController
     {
         return $this->redirectToRoute('request_test');
     }
+
+    // Abstract Controller ı extends ettiğinden emin ol container ile servis bağlamak için
+    /**
+     * @Route("/service", name="service_test")
+     * @return Response
+     */
+    public function serviceTest()
+    {
+        $session = $this->container->get('session');
+
+        return new Response($session->getName());
+    }
 }
