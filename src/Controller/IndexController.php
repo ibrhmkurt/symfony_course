@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
@@ -62,12 +63,11 @@ class IndexController extends AbstractController
     // Abstract Controller ı extends ettiğinden emin ol container ile servis bağlamak için
     /**
      * @Route("/service", name="service_test")
+     * @param SessionInterface $session
      * @return Response
      */
-    public function serviceTest()
+    public function serviceTest(SessionInterface $session)
     {
-        $session = $this->container->get('session');
-
         return new Response($session->getName());
     }
 }
